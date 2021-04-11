@@ -43,7 +43,7 @@ app.route('/register')
   .post((req, res) => {
 
     const newUser = new User({
-      email: req.body.userName,
+      email: req.body.username,
       password: req.body.password
     });
 
