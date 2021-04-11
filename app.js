@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-mongoose.connect(`mongodb+srv://${process.env.ATLAS_ID}:${process.env.ATLAS_KEY}@cluster0.zvnci.mongodb.net/userDB`, {
+mongoose.connect(process.env.ATLAS_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
