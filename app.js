@@ -2,7 +2,6 @@ require('dotenv').config();
 const _ = require('lodash');
 const express = require('express');
 const mongoose = require('mongoose');
-const encrypt = require('mongoose-encryption');
 const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
@@ -24,8 +23,6 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String
 });
-
-userSchema.plugin(encrypt, { secret: process.env.SECRET_KEY, encryptedFields: ['password'] });
 
 const User = new mongoose.model('user', userSchema);
 
