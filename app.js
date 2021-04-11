@@ -38,9 +38,9 @@ app.route('/login')
     const username = req.body.username;
     const password = req.body.password;
 
-    User.findOne({ email: username }), (err, results) => {
+    User.findOne({ email: username}, (err, results) => {
       if (err) {
-        console.log('Error--->', err);
+        console.log('Error occurs ===>', err);
       } else {
         if (results) {
           if (results.password === password) {
@@ -48,7 +48,7 @@ app.route('/login')
           }
         }
       }
-    };
+    });
   });
 
 
