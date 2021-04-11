@@ -33,6 +33,24 @@ app.route('/')
 app.route('/login')
   .get((req, res) => {
     res.render('login');
+  })
+  .post((req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    User.findOne({
+      email: username
+    }),
+    (err, results) => {
+      if (err) {
+        console.log('Error--->', err);
+      } else {
+        if (results) {
+          if (results.password === password) {
+            res.render('secrets');
+          }
+        }
+      }
+    };
   });
 
 
