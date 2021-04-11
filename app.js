@@ -37,10 +37,8 @@ app.route('/login')
   .post((req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    User.findOne({
-      email: username
-    }),
-    (err, results) => {
+
+    User.findOne({ email: username }), (err, results) => {
       if (err) {
         console.log('Error--->', err);
       } else {
