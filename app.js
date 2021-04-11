@@ -1,8 +1,8 @@
+require('dotenv').config();
 const _ = require('lodash');
 const express = require('express');
 const mongoose = require('mongoose');
-const { ID } = require('./config');
-const { KEY } = require('./config');
+const encrypt = require('mongoose-encryption');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,16 +12,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-mongoose.connect(`mongodb+srv://${ID}:${KEY}@cluster0.zvnci.mongodb.net/userDB`, {
+mongoose.connect(`mongodb+srv://${process.env.ATLAS_ID}:${process.env.ATLAS_KEY}@cluster0.zvnci.mongodb.net/userDB`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
 });
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   email: String,
   password: String
 });
+
+userSchema.plugin(encrypt, { secret: process.env.SECRET_KEY, encryptedFields: ['password'] });
 
 const User = new mongoose.model('user', userSchema);
 
