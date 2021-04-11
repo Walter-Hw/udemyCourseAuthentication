@@ -25,35 +25,37 @@ const userSchema = mongoose.Schema({
 
 const User = new mongoose.model('user', userSchema);
 
-
-app.get('/', (req, res) => {
-  res.render('home');
-});
-
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
-app.get('/register', (req, res) => {
-  res.render('register');
-});
-
-app.post('/register', (req, res) => {
-
-  const newUser = new User({
-    email: req.body.userName,
-    password: req.body.password
+app.route('/')
+  .get((req, res) => {
+    res.render('home');
   });
 
-  newUser.save((err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('secrets');
-    }
+app.route('/login')
+  .get((req, res) => {
+    res.render('login');
   });
 
-});
+
+app.route('/register')
+  .get((req, res) => {
+    res.render('register');
+  })
+  .post((req, res) => {
+
+    const newUser = new User({
+      email: req.body.userName,
+      password: req.body.password
+    });
+
+    newUser.save((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render('secrets');
+      }
+    });
+
+  });
 
 app.listen(port, () => {
   console.log('Start listening on port', port);
