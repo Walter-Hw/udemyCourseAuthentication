@@ -44,9 +44,11 @@ app.route('/login')
         console.log('Error occurs ===>', err);
       } else {
         if (results) {
-          if (results.password === password) {
-            res.render('secrets');
-          }
+          bcrypt.compare(password, results.password, (err, result) => {
+            if (result === true) {
+              res.render('secrets');
+            }
+          });
         }
       }
     });
