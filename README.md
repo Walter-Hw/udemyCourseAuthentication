@@ -3,7 +3,7 @@
 ---
 #### Tech Stack
 - JavaScript
-- JSX
+- EJS
 - Mongoose
 - Heroku Deployment
 - Passport
