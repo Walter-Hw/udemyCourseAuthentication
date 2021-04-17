@@ -8,3 +8,4 @@
 - Heroku Deployment
 - Passport
 - Mongoose-local-passport
+- OAuth 2.0 for Google
