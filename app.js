@@ -99,6 +99,12 @@ app.route('/register')
     });
   });
 
+app.route('/logout')
+  .get((req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
+
 app.listen(port, () => {
   console.log('Start listening on port', port);
 });
