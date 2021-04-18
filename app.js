@@ -8,7 +8,6 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const findOrCreatePlugin = require('mongoose-findorcreate');
-const { get } = require('lodash');
 
 const app = express();
 const port = process.env.PORT || 3000;
