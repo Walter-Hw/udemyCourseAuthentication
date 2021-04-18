@@ -8,6 +8,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const findOrCreatePlugin = require('mongoose-findorcreate');
+const { get } = require('lodash');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -57,6 +58,7 @@ passport.use(new GoogleStrategy({
   userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
 },
 function(accessToken, refreshToken, profile, cb) {
+  console.log(profile);
   User.findOrCreate({ googleId: profile.id }, function (err, user) {
     return cb(err, user);
   });
@@ -73,7 +75,10 @@ app.route('/auth/google')
     passport.authenticate('google', { scope: ['profile'] })
   );
 
-app.route('/auth');
+app.route('/auth/google/secrets')
+  .get(passport.authenticate('google', {failureRedirect: '/login'}), (req, res) => {
+    res.redirect('/secrets');
+  });
 
 app.route('/login')
   .get((req, res) => {
