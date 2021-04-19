@@ -112,7 +112,7 @@ app.route('/login')
 
 app.route('/secrets')
   .get((req, res) => {
-    User.find({'secrets': { $ne: null }}, (err, foundUsers) => {
+    User.find({'secret': { $ne: null }}, (err, foundUsers) => {
       if (err) {
         res.send(err);
       } else {
