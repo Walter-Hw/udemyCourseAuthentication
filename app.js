@@ -135,6 +135,15 @@ app.route('/register')
     });
   });
 
+app.route('submit')
+  .get((req, res) => {
+    if (req.isAuthenticated()) {
+      res.render('submit');
+    } else {
+      res.redirect('/login');
+    }
+  });
+
 app.route('/logout')
   .get((req, res) => {
     req.logout();
